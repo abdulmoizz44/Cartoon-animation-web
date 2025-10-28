@@ -1,0 +1,45 @@
+pipeline:
+  name: build-nodejs-to-ecr
+  identifier: buildnodejstoecr
+  projectIdentifier: cartoon
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: account.Github
+        repoName: Cartoon-animation-web
+        build: <+input>
+  stages:
+    - stage:
+        name: Build and Push Image
+        identifier: Build_and_Push_Image
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          caching:
+            enabled: true
+            override: true
+          buildIntelligence:
+            enabled: true
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Docker
+            spec:
+              harnessImageConnectorRef: account.harnessImage
+          execution:
+            steps:
+              - step:
+                  type: BuildAndPushECR
+                  name: BuildAndPushECR_1
+                  identifier: BuildAndPushECR_1
+                  spec:
+                    connectorRef: awscloudconnector
+                    region: us-east-1
+                    account: "084828598848"
+                    imageName: cartoon
+                    tags:
+                      - latest
