@@ -88,7 +88,7 @@ pipeline:
                         name: docker_run
                         type: Script
                         spec:
-                          workingDirectory: /cartoon
+                          workingDirectory: ""
                           shell: Bash
                           source:
                             type: Inline
@@ -111,6 +111,7 @@ pipeline:
                                 docker run -d --name cartoon -p 3000:3000 084828598848.dkr.ecr.us-east-1.amazonaws.com/cartoon:v2
 
                                 echo "Deployment successful on EC2 instance!"
+                          tailFiles: []
                   timeout: 10m
             rollbackSteps:
               - step:
