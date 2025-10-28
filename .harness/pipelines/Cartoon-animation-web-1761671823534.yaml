@@ -57,6 +57,11 @@ pipeline:
             deployToAll: false
             infrastructureDefinitions:
               - identifier: secureshell
+                inputs:
+                  identifier: secureshell
+                  type: SshWinRmAws
+                  spec:
+                    targetedHosts: <+input>
           execution:
             steps:
               - step:
