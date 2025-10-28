@@ -21,7 +21,7 @@ pipeline:
                     command: echo "Welcome to Harness CI"
               - step:
                   type: BuildAndPushECR
-                  name: BuildAndPushECR_1
+                  name: BuildAndPushECR
                   identifier: BuildAndPushECR_1
                   spec:
                     connectorRef: awsconnector
