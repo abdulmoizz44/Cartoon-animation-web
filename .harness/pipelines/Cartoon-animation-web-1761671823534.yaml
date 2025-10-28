@@ -67,6 +67,43 @@ pipeline:
                           - name: DestinationDirectory
                             type: String
                             value: $HOME/<+service.name>/<+env.name>
+              - step:
+                  type: Command
+                  name: Command_1
+                  identifier: Command_1
+                  spec:
+                    onDelegate: false
+                    environmentVariables: []
+                    outputVariables: []
+                    commandUnits:
+                      - identifier: docker_run
+                        name: docker_run
+                        type: Script
+                        spec:
+                          workingDirectory: /cartoon
+                          shell: Bash
+                          source:
+                            type: Inline
+                            spec:
+                              script: |
+                                #!/bin/bash
+                                set -e
+
+                                # Login to ECR
+                                aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 084828598848.dkr.ecr.us-east-1.amazonaws.com
+
+                                # Stop and remove old container (if any)
+                                docker stop cartoon || true
+                                docker rm cartoon || true
+
+                                # Pull the latest image
+                                docker pull 084828598848.dkr.ecr.us-east-1.amazonaws.com/cartoon:v2
+
+                                # Run the new container
+                                docker run -d --name cartoon -p 3000:3000 084828598848.dkr.ecr.us-east-1.amazonaws.com/cartoon:v2
+
+                                echo "Deployment successful on EC2 instance!"
+                  timeout: 10m
             rollbackSteps:
               - step:
                   name: Rollback
