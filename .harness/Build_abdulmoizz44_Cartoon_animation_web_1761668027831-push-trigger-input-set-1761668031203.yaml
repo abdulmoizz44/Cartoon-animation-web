@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_abdulmoizz44_Cartoon_animation_web_1761668027831-push-trigger-input-set
+  identifier: Build_abdulmoizz44_Cartoon_animation_web_1761668027831pushtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: cartoon
+  pipeline:
+    identifier: Build_abdulmoizz44_Cartoon_animation_web_1761668027831
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
