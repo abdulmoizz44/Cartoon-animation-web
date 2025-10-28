@@ -1,0 +1,51 @@
+pipeline:
+  name: yoyoyo
+  identifier: Build_abdulmoizz44_Cartoon_animation_web_1761669594132
+  projectIdentifier: cartoon
+  orgIdentifier: default
+  stages:
+    - stage:
+        name: Build
+        identifier: Build
+        type: CI
+        spec:
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Echo Welcome Message
+                  identifier: Echo_Welcome_Message
+                  spec:
+                    shell: Sh
+                    command: echo "Welcome to Harness CI"
+              - step:
+                  type: BuildAndPushECR
+                  name: BuildAndPushECR_1
+                  identifier: BuildAndPushECR_1
+                  spec:
+                    connectorRef: awsconnector
+                    region: us-east-1
+                    account: "084828598848"
+                    imageName: 084828598848.dkr.ecr.us-east-1.amazonaws.com/cartoon
+                    tags: <+input>
+                  failureStrategies:
+                    - onFailure:
+                        errors:
+                          - Unknown
+                        action:
+                          type: MarkAsSuccess
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Docker
+            spec: {}
+        description: ""
+  properties:
+    ci:
+      codebase:
+        connectorRef: account.Github
+        repoName: abdulmoizz44/Cartoon-animation-web
+        build: <+input>
+  tags: {}
