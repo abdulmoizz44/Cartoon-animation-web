@@ -118,6 +118,19 @@ pipeline:
                                 echo "Deployment successful on EC2 instance!"
                           tailFiles: []
                   timeout: 10m
+                  failureStrategies:
+                    - onFailure:
+                        errors:
+                          - AllErrors
+                        action:
+                          type: Retry
+                          spec:
+                            retryCount: 1
+                            retryIntervals:
+                              - 2m
+                            onRetryFailure:
+                              action:
+                                type: MarkAsSuccess
             rollbackSteps:
               - step:
                   name: Rollback
