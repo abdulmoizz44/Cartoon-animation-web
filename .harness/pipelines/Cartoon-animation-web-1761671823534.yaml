@@ -44,6 +44,14 @@ pipeline:
           deploymentType: Ssh
           service:
             serviceRef: cartoonservice
+            serviceInputs:
+              serviceDefinition:
+                type: Ssh
+                spec:
+                  artifacts:
+                    primary:
+                      primaryArtifactRef: <+input>
+                      sources: <+input>
           environment:
             environmentRef: staging
             deployToAll: false
