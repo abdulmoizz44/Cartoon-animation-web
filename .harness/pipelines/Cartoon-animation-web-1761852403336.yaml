@@ -45,6 +45,8 @@ pipeline:
                     command: |-
                       #!/bin/bash
 
+                      set -ex
+
                       # Example variables (Harness expressions)
                       IMAGE_REPO="084828598848.dkr.ecr.us-east-1.amazonaws.com/cartoon"
                       IMAGE_TAG=<+artifact.tag>
