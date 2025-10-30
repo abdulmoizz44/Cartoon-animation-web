@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_abdulmoizz44_Cartoon_animation_web_1761852407208-pr-trigger-input-set
+  identifier: Build_abdulmoizz44_Cartoon_animation_web_1761852407208prtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: k8spractise
+  pipeline:
+    identifier: Build_abdulmoizz44_Cartoon_animation_web_1761852407208
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>
