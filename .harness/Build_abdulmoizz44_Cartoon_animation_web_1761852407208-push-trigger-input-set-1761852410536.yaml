@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_abdulmoizz44_Cartoon_animation_web_1761852407208-push-trigger-input-set
+  identifier: Build_abdulmoizz44_Cartoon_animation_web_1761852407208pushtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: k8spractise
+  pipeline:
+    identifier: Build_abdulmoizz44_Cartoon_animation_web_1761852407208
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
