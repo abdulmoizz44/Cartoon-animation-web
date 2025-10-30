@@ -43,8 +43,6 @@ pipeline:
                   spec:
                     shell: Sh
                     command: |-
-                      #!/bin/bash
-
                       set -ex
 
                       # Example variables (Harness expressions)
