@@ -19,6 +19,23 @@ pipeline:
                   spec:
                     shell: Sh
                     command: echo "Welcome to Harness CI"
+              - step:
+                  type: BuildAndPushECR
+                  name: BuildAndPushECR
+                  identifier: BuildAndPushECR
+                  spec:
+                    connectorRef: awsconnector
+                    region: us-east-1
+                    account: "084828598848"
+                    imageName: 084828598848.dkr.ecr.us-east-1.amazonaws.com/cartoon
+                    tags: <+input>
+              - step:
+                  type: Run
+                  name: Run_2
+                  identifier: Run_2
+                  spec:
+                    shell: Sh
+                    command: echo 'Yo build has been pushed'
           platform:
             os: Linux
             arch: Amd64
