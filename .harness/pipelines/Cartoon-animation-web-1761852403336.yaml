@@ -36,39 +36,6 @@ pipeline:
                   spec:
                     shell: Sh
                     command: echo 'Yo build has been pushed'
-              - step:
-                  type: Run
-                  name: Run_3
-                  identifier: Run_3
-                  spec:
-                    shell: Sh
-                    command: |-
-                      set -ex
-
-                      # Example variables (Harness expressions)
-                      IMAGE_REPO="084828598848.dkr.ecr.us-east-1.amazonaws.com/cartoon"
-                      IMAGE_TAG=<+artifact.tag>
-                      GITHUB_USER="abdulmoizz44"
-                      GITHUB_TOKEN=<+secrets.getValue("GITHUB_PAT")>
-                      REPO_NAME="cartoon-gitops"
-                      MANIFEST_PATH="k8s/deployments.yaml"
-
-                      # Build authenticated repo URL using Harness secret
-                      origin="https://${GITHUB_USER}:${GITHUB_TOKEN}@github.com/${GITHUB_USER}/${REPO_NAME}.git"
-
-                      # Clone the GitOps repo
-                      git clone "$origin"
-                      cd ${REPO_NAME}/k8s
-
-                      # Update the image tag in deployment.yaml
-                      sed -i "s|image: ${IMAGE_REPO}:.*|image: ${IMAGE_REPO}:${IMAGE_TAG}|g" $MANIFEST_PATH
-
-                      # Commit and push the change
-                      git config user.name "harness-bot"
-                      git config user.email "ci@harness.io"
-                      git add $MANIFEST_PATH
-                      git commit -m "Update image tag to ${IMAGE_TAG}"
-                      git push "$origin" main
           platform:
             os: Linux
             arch: Amd64
